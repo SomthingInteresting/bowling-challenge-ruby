@@ -9,6 +9,17 @@ class Scorecard
     frame.total = frame.rolls.sum(&:score)
     if frame.rolls.size == 2 || frame.rolls.map(&:score).sum >= 10
       @frames << frame
+      apply_strike_bonus(frame, frames[-2], frames[-3])
+    end
+  end
+
+  def apply_strike_bonus(frame, previous_frame, previous_previous_frame)
+    if previous_frame && previous_frame.rolls.first.score == 10
+      previous_frame.total += frame.total
+    end
+
+    if previous_previous_frame && previous_previous_frame.rolls.first.score == 10 && previous_frame.rolls.first.score == 10
+      previous_previous_frame.total += frame.total
     end
   end
 

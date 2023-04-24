@@ -25,10 +25,8 @@ RSpec.describe Scorecard do
     it 'calculates the strike bonus correctly' do
       game = Game.new
 
-      # Roll a strike
       game.roll(10)
 
-      # Roll two more rolls
       game.roll(3)
       game.roll(4)
 
